@@ -1,0 +1,2 @@
+cd "Y:\\Documents\\NX Simulations\\Nastran"
+"C:\\Program Files\\Siemens\\Simcenter3D_2020.2\\NXNASTRAN\\bin\\nastranw.exe" "Y:\\Documents\\NX Simulations\\Nastran\\sol103_plaque_simple.dat" scr=yes old=no delete=f04,log,xdb

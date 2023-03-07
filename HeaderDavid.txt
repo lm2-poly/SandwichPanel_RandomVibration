@@ -1,0 +1,87 @@
+$* SOLUTION 111 - FREQUENCY DEPENDENT (based on YouTube)
+$*
+$*$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+$*
+$* NASTRAN
+$*
+$*$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+$*
+NASTRAN RMSVM=1
+NASTRAN RANFRF=1
+$*
+$*$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+$*
+$* FILE MANAGEMENT
+$*
+$*$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+$*
+$*
+$*$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+$*
+$* EXECUTIVE CONTROL
+$*
+$*$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+$*
+ID,NASTRAN,bulk_s-solution_111
+SOL 111
+CEND
+$*
+$*$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+$*
+$* CASE CONTROL
+$*
+$*$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+$*
+ECHO = NONE
+RESVEC(APPLOD,RVDOF,RVEL,INRLOD,DAMPLOD,DYNRSP) = YES
+MODSEL = ALL
+SPC = 4
+METHOD = 1
+SDAMPING = 20
+OUTPUT
+DISPLACEMENT(PLOT,REAL) = ALL
+$ SPCFORCES(PLOT,REAL) = ALL
+STRESS(PLOT,REAL,VONMISES,CENTER) = ALL
+$ MEFFMASS(PLOT,PRINT,SUMMARY) = YES
+$
+SUBCASE 1
+  LABEL = Subcase - Modal Frequency 1
+  SPC = 101
+  DLOAD = 10
+  FREQUENCY = 101
+  OUTPUT
+  DISPLACEMENT(PLOT,REAL) = ALL
+  SPCFORCES(PLOT,REAL) = ALL
+  STRESS(PLOT,REAL,VONMISES,CORNER) = ALL
+SUBCASE 2
+  LABEL = Subcase - RMS 1
+  FREQUENCY = 101
+  RANDOM(RPOSTS1=0) = 102
+  ANALYSIS = RANDOM
+  OUTPUT
+  DISPLACEMENT(PLOT,REAL) = ALL
+  STRESS(PLOT,REAL,VONMISES,CORNER) = ALL
+$*
+$*$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+$*
+$* BULK DATA
+$*
+$*$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+$*
+BEGIN BULK
+$*
+$* SOLUTION CARDS
+$*
+$* PARAM CARDS
+$*
+PARAM      DDRMM      -1
+PARAM    AUTOMPC     YES
+PARAM          G  0.0000
+PARAM      K6ROT100.0000
+PARAM      KDAMP       1
+PARAM     OIBULK     YES
+PARAM    OMACHPR     YES
+PARAM    OUGCORD  GLOBAL
+PARAM       POST      -2
+PARAM    POSTEXT     YES
+PARAM    UNITSYS   MN-MM
